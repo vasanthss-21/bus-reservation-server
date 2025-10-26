@@ -1,0 +1,10 @@
+### Book a new reservation
+POST http://localhost:8081/api/reservations
+Content-Type: application/json
+
+{
+  "customerName": "Direct Test",
+  "routeId": 1,
+  "travelTime": "10:30",
+  "seatNumber": 15
+}
