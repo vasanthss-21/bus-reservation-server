@@ -1,4 +1,4 @@
-# Use an official Java 17 image
+# Use Java 21 JDK to match your project
 FROM eclipse-temurin:21-jdk
 
 # Set working directory
@@ -9,17 +9,21 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 
+# Make mvnw executable
+RUN chmod +x mvnw
+
 # Download dependencies (cached)
 RUN ./mvnw dependency:go-offline
 
-# Copy the rest of the project
+# Copy source code
 COPY src src
 
-# Package the Spring Boot app
+# Build the Spring Boot JAR
 RUN ./mvnw clean package -DskipTests
 
-# Expose the app port (change if needed)
+# Expose port 8081
 EXPOSE 8081
 
-# Run the app
-CMD ["java", "-jar", "target/*.jar"]
+# Run the JAR
+# Replace with exact JAR name from target folder
+CMD ["java", "-jar", "target/Bus_Reservation_System-0.0.1-SNAPSHOT.jar"]
