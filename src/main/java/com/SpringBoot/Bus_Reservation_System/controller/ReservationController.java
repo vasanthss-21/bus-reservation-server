@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reservations")
-@CrossOrigin(origins = "http://localhost:5173") // Or your frontend URL
+@CrossOrigin(origins = "*")
 public class ReservationController {
 
     private final ReservationRepository reservationRepository;
@@ -87,6 +87,15 @@ public class ReservationController {
             @RequestParam String routeId,
             @RequestParam String travelTime) {
         return reservationRepository.findOccupiedSeatNumbers(routeId, travelTime);
+    }
+
+    /**
+     * Gets all bookings for a specific customer by name.
+     * Used by the Profile page: GET /api/reservations/my?name=Vasanth
+     */
+    @GetMapping("/my")
+    public List<Reservation> getMyBookings(@RequestParam String name) {
+        return reservationRepository.findByCustomerName(name);
     }
 }
 

@@ -14,6 +14,9 @@ public interface ReservationRepository extends MongoRepository<Reservation, Stri
     // Method for the cancellation logic
     long deleteByCustomerNameAndRouteId(String customerName, String routeId);
 
+    // Fetch all bookings for a specific customer (used by Profile page)
+    List<Reservation> findByCustomerName(String customerName);
+
     /**
      * Counts all reservations for a specific route and departure time.
      * This is used by the controller to check if the bus is full.
